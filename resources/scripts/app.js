@@ -9,6 +9,10 @@ const GRAY_COLOR_HEXADECIMAL = '#585858'
 const YELLOW_COLOR_HEXADECIMAL = '#B59F3B'
 const GREEN_COLOR_HEXADECIMAL = '#538D4E'
 
+const TOASTIFY_SUCCESS_COLOR = '#538D4E'
+const TOASTIFY_ERROR_COLOR = '#BA4747'
+const TOASTIFY_WARNING_COLOR = '#B59F3B'
+
 const NOTIFICATION_DISPLAY_LETTER_SUCCESSFULLY = 'Showing letter with success'
 const NOTIFICATION_BACKSPACE_KEY_PRESSED = 'Backspace key pressed'
 const NOTIFICATION_BACKSPACE_WHEN_EMPTY_GUESS = 'Could not erase when is an empty guess'
@@ -27,6 +31,22 @@ const gameInitialConfig = {
     currentLetterPosition: 1,
     currentGuess: '',
     rightGuess: ''
+}
+
+const toastifyDefaultConfig = {
+  duration: 3000,
+  newWindow: true,
+  close: true,
+  gravity: 'top',
+  position: 'center',
+  stopOnFocus: true,
+  style: {
+    boxShadow: "1px 3px 10px 0px #585858"
+  }
+}
+
+const showNotification = ({ backgroundColor, message }) => {
+  Toastify({ ...toastifyDefaultConfig, text: message, backgroundColor }).showToast();
 }
 
 const getOneRandomWord = (wordsList) => {
@@ -151,16 +171,23 @@ const checkGuess = (game) => {
   const { database, currentLetterPosition, currentGuess } = game;
 
   if (isCurrentGuessEmpty(currentGuess)) {
-    return NOTIFICATION_EMPTY_GUESS;
+    return showNotification({ message: NOTIFICATION_EMPTY_GUESS, backgroundColor: TOASTIFY_ERROR_COLOR });
   }
 
   if (!reachMaxLetterPerRow(currentLetterPosition)) {
-    return NOTIFICATION_INCOMPLETE_GUESS;
+    return showNotification({ message: NOTIFICATION_INCOMPLETE_GUESS, backgroundColor: TOASTIFY_WARNING_COLOR });
   }
 
   if (!isGuessInDatabase(currentGuess, database)) {
-    return NOTIFICATION_WORD_NOT_IN_DATABASE;
+    return showNotification({ message: NOTIFICATION_WORD_NOT_IN_DATABASE, backgroundColor: TOASTIFY_WARNING_COLOR });
   }
+
+  if (isCorrectGuess(currentGuess, rightGuess)) {
+    displayColor(game)
+    return showNotification({ message: NOTIFICATION_GAME_OVER_GUESS_RIGHT, backgroundColor: TOASTIFY_SUCCESS_COLOR });
+  }
+
+  displayColor(game);
 
   return nextGuess(game);
 };
@@ -169,28 +196,28 @@ const onKeyPressed = (pressedKey, game) => {
   const { currentLetterPosition, currentGuess, currentRow } = game;
 
   if (reachMaxAttempts(currentRow)) {
-    return NOTIFICATION_REACH_MAX_ATTEMPTS;
-  }
+        return showNotification({ message: NOTIFICATION_REACH_MAX_ATTEMPTS, backgroundColor: TOASTIFY_ERROR_COLOR })
+    }
 
-  if (!isValidKeyPressed(pressedKey)) {
-    return NOTIFICATION_INVALID_PRESSED_KEY;
-  }
+    if (!isValidKeyPressed(pressedKey)) {
+        return showNotification({ message: NOTIFICATION_INVALID_PRESSED_KEY, backgroundColor: TOASTIFY_ERROR_COLOR })
+    }
 
-  if (isBackspaceKeyPressed(pressedKey) && !isCurrentGuessEmpty(currentGuess)) {
-    return removeLetterFromBoard(game);
-  }
+    if (isBackspaceKeyPressed(pressedKey) && !isCurrentGuessEmpty(currentGuess)) {
+        return removeLetterFromBoard(game)
+    }
 
-  if (isBackspaceKeyPressed(pressedKey) && isCurrentGuessEmpty(currentGuess)) {
-    return NOTIFICATION_BACKSPACE_WHEN_EMPTY_GUESS;
-  }
+    if (isBackspaceKeyPressed(pressedKey) && isCurrentGuessEmpty(currentGuess)) {
+        return showNotification({ message: NOTIFICATION_BACKSPACE_WHEN_EMPTY_GUESS, backgroundColor: TOASTIFY_WARNING_COLOR })
+    }
 
-  if (isEnterKeyPressed(pressedKey)) {
-    return checkGuess(game);
-  }
+    if (isEnterKeyPressed(pressedKey)) {
+        return checkGuess(game)
+    }
 
-  if (reachMaxLetterPerRow(currentLetterPosition)) {
-    return NOTIFICATION_REACH_MAX_LETTERS_PER_ROW;
-  }
+    if (reachMaxLetterPerRow(currentLetterPosition)) {
+        return showNotification({ message: NOTIFICATION_REACH_MAX_LETTERS_PER_ROW, backgroundColor: TOASTIFY_ERROR_COLOR })
+    }
 
   return displayLetterOnTheBoard(game, pressedKey);
 };
@@ -236,10 +263,11 @@ const start = () => {
 
     window.onload = async () => {
         const database = await loadWords()
+        const rightGuess = getOneRandomWord(database)
 
-        const game = { ...gameInitialConfig, database }
+        const game = { ...gameInitialConfig, database, rightGuess }
         console.log(database) // Mostra todas as palavras
-        console.log('get one random word: ', getOneRandomWord(database)) // Mostra uma palavra aleatória
+        console.log('get one random word: ', rightGuess) // Mostra uma palavra aleatória
 
         document.addEventListener('keydown', (event) => onKeyPressed(event.key, game))
     }
