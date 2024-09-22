@@ -20,7 +20,7 @@ const {
   KEY_DELETE,
 } = require("./auxi/consts");
 
-const { getGameBoardLetter } = require("./auxi/helpers");
+const { getGameBoardLetterBackgroundColor } = require("./auxi/helpers");
 
 const {
   mockToastify,
@@ -338,16 +338,16 @@ describe("Testing on key pressed", () => {
       expect(game.currentLetterPosition).toBe(6);
       expect(game.currentRow).toBe(1);
 
-      expect(getGameBoardLetter(1)).toBe(GREEN_COLOR_RGB);
-      expect(getGameBoardLetter(2)).toBe(GREEN_COLOR_RGB);
-      expect(getGameBoardLetter(3)).toBe(GREEN_COLOR_RGB);
-      expect(getGameBoardLetter(4)).toBe(GREEN_COLOR_RGB);
-      expect(getGameBoardLetter(5)).toBe(GREEN_COLOR_RGB);
+      expect(getGameBoardLetterBackgroundColor(1)).toBe(GREEN_COLOR_RGB);
+      expect(getGameBoardLetterBackgroundColor(2)).toBe(GREEN_COLOR_RGB);
+      expect(getGameBoardLetterBackgroundColor(3)).toBe(GREEN_COLOR_RGB);
+      expect(getGameBoardLetterBackgroundColor(4)).toBe(GREEN_COLOR_RGB);
+      expect(getGameBoardLetterBackgroundColor(5)).toBe(GREEN_COLOR_RGB);
 
-      expect(getGameBoardLetter("a")).toBe(GREEN_COLOR_RGB);
-      expect(getGameBoardLetter("l")).toBe(GREEN_COLOR_RGB);
-      expect(getGameBoardLetter("o")).toBe(GREEN_COLOR_RGB);
-      expect(getGameBoardLetter("w")).toBe(GREEN_COLOR_RGB);
+      expect(getGameBoardLetterBackgroundColor("a")).toBe(GREEN_COLOR_RGB);
+      expect(getGameBoardLetterBackgroundColor("l")).toBe(GREEN_COLOR_RGB);
+      expect(getGameBoardLetterBackgroundColor("o")).toBe(GREEN_COLOR_RGB);
+      expect(getGameBoardLetterBackgroundColor("w")).toBe(GREEN_COLOR_RGB);
 
       expect(global.Toastify).toHaveBeenCalled();
       expect(global.Toastify).toHaveBeenCalledWith({

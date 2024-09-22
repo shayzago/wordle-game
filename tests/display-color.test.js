@@ -8,7 +8,7 @@ const {
   GRAY_COLOR_RGB,
 } = require("./auxi/consts");
 
-const { getGameBoardLetter } = require("./auxi/helpers");
+const { getGameBoardLetterBackgroundColor } = require("./auxi/helpers");
 
 describe("Testing display color...", () => {
   const database = [
@@ -47,16 +47,16 @@ describe("Testing display color...", () => {
 
     app.displayColor(game);
 
-    expect(getGameBoardLetter(1)).toBe(GREEN_COLOR_RGB);
-    expect(getGameBoardLetter(2)).toBe(GREEN_COLOR_RGB);
-    expect(getGameBoardLetter(3)).toBe(GREEN_COLOR_RGB);
-    expect(getGameBoardLetter(4)).toBe(GREEN_COLOR_RGB);
-    expect(getGameBoardLetter(5)).toBe(GREEN_COLOR_RGB);
+    expect(getGameBoardLetterBackgroundColor(1)).toBe(GREEN_COLOR_RGB);
+    expect(getGameBoardLetterBackgroundColor(2)).toBe(GREEN_COLOR_RGB);
+    expect(getGameBoardLetterBackgroundColor(3)).toBe(GREEN_COLOR_RGB);
+    expect(getGameBoardLetterBackgroundColor(4)).toBe(GREEN_COLOR_RGB);
+    expect(getGameBoardLetterBackgroundColor(5)).toBe(GREEN_COLOR_RGB);
 
-    expect(getGameBoardLetter("a")).toBe(GREEN_COLOR_RGB);
-    expect(getGameBoardLetter("l")).toBe(GREEN_COLOR_RGB);
-    expect(getGameBoardLetter("o")).toBe(GREEN_COLOR_RGB);
-    expect(getGameBoardLetter("w")).toBe(GREEN_COLOR_RGB);
+    expect(getGameBoardLetterBackgroundColor("a")).toBe(GREEN_COLOR_RGB);
+    expect(getGameBoardLetterBackgroundColor("l")).toBe(GREEN_COLOR_RGB);
+    expect(getGameBoardLetterBackgroundColor("o")).toBe(GREEN_COLOR_RGB);
+    expect(getGameBoardLetterBackgroundColor("w")).toBe(GREEN_COLOR_RGB);
   });
 
   test("when comparing sorry with worry", () => {
@@ -68,16 +68,16 @@ describe("Testing display color...", () => {
 
     app.displayColor(game);
 
-    expect(getGameBoardLetter(1)).toBe(GRAY_COLOR_RGB);
-    expect(getGameBoardLetter(2)).toBe(GREEN_COLOR_RGB);
-    expect(getGameBoardLetter(3)).toBe(GREEN_COLOR_RGB);
-    expect(getGameBoardLetter(4)).toBe(GREEN_COLOR_RGB);
-    expect(getGameBoardLetter(5)).toBe(GREEN_COLOR_RGB);
+    expect(getGameBoardLetterBackgroundColor(1)).toBe(GRAY_COLOR_RGB);
+    expect(getGameBoardLetterBackgroundColor(2)).toBe(GREEN_COLOR_RGB);
+    expect(getGameBoardLetterBackgroundColor(3)).toBe(GREEN_COLOR_RGB);
+    expect(getGameBoardLetterBackgroundColor(4)).toBe(GREEN_COLOR_RGB);
+    expect(getGameBoardLetterBackgroundColor(5)).toBe(GREEN_COLOR_RGB);
 
-    expect(getGameBoardLetter("s")).toBe(GRAY_COLOR_RGB);
-    expect(getGameBoardLetter("o")).toBe(GREEN_COLOR_RGB);
-    expect(getGameBoardLetter("r")).toBe(GREEN_COLOR_RGB);
-    expect(getGameBoardLetter("y")).toBe(GREEN_COLOR_RGB);
+    expect(getGameBoardLetterBackgroundColor("s")).toBe(GRAY_COLOR_RGB);
+    expect(getGameBoardLetterBackgroundColor("o")).toBe(GREEN_COLOR_RGB);
+    expect(getGameBoardLetterBackgroundColor("r")).toBe(GREEN_COLOR_RGB);
+    expect(getGameBoardLetterBackgroundColor("y")).toBe(GREEN_COLOR_RGB);
   });
 
   test("when comparing basic with beans", () => {
@@ -89,16 +89,16 @@ describe("Testing display color...", () => {
 
     app.displayColor(game);
 
-    expect(getGameBoardLetter(1)).toBe(GREEN_COLOR_RGB);
-    expect(getGameBoardLetter(2)).toBe(YELLOW_COLOR_RGB);
-    expect(getGameBoardLetter(3)).toBe(YELLOW_COLOR_RGB);
-    expect(getGameBoardLetter(4)).toBe(GRAY_COLOR_RGB);
-    expect(getGameBoardLetter(5)).toBe(GRAY_COLOR_RGB);
+    expect(getGameBoardLetterBackgroundColor(1)).toBe(GREEN_COLOR_RGB);
+    expect(getGameBoardLetterBackgroundColor(2)).toBe(YELLOW_COLOR_RGB);
+    expect(getGameBoardLetterBackgroundColor(3)).toBe(YELLOW_COLOR_RGB);
+    expect(getGameBoardLetterBackgroundColor(4)).toBe(GRAY_COLOR_RGB);
+    expect(getGameBoardLetterBackgroundColor(5)).toBe(GRAY_COLOR_RGB);
 
-    expect(getGameBoardLetter("b")).toBe(GREEN_COLOR_RGB);
-    expect(getGameBoardLetter("a")).toBe(YELLOW_COLOR_RGB);
-    expect(getGameBoardLetter("s")).toBe(YELLOW_COLOR_RGB);
-    expect(getGameBoardLetter("i")).toBe(GRAY_COLOR_RGB);
-    expect(getGameBoardLetter("c")).toBe(GRAY_COLOR_RGB);
+    expect(getGameBoardLetterBackgroundColor("b")).toBe(GREEN_COLOR_RGB);
+    expect(getGameBoardLetterBackgroundColor("a")).toBe(YELLOW_COLOR_RGB);
+    expect(getGameBoardLetterBackgroundColor("s")).toBe(YELLOW_COLOR_RGB);
+    expect(getGameBoardLetterBackgroundColor("i")).toBe(GRAY_COLOR_RGB);
+    expect(getGameBoardLetterBackgroundColor("c")).toBe(GRAY_COLOR_RGB);
   });
 });
