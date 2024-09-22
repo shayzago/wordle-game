@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
-* { 
+* {
     border: 0;
     margin: 0;
     padding: 0;
@@ -19,7 +19,7 @@ body {
 }
 
 main {
-    margin: 100px auto 0;
+    margin: 70px auto 0;
     width: 330px;
 }
 
@@ -74,4 +74,20 @@ main {
 .keyboard .enter {
     font-size: 17px;
     width: 83px;
+}
+
+.play-again {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.btn-play-again {
+    background-color: #F9FF00;
+    border-radius: 10px;
+    color: #14161C;
+    cursor: pointer;
+    display: none;
+    font-weight: bold;
+    padding: 10px 20px;
 }
